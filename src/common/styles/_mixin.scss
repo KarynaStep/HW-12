@@ -1,0 +1,7 @@
+@mixin flexColumn {
+  flex-direction: column;
+}
+
+@mixin borderRadius($radius){
+  border-radius: $radius;
+}

@@ -1,0 +1,19 @@
+@use '/src/common/styles/breackpoints' as *;
+@use '/src/common/styles/colors' as *;
+@use '/src/common/styles/templates' as *;
+@use '/src/common/styles/mixin' as *;
+
+.container{
+  @extend %flex-between;
+  width: 80%;
+  min-width: 550px;
+  max-width: 1100px;
+  margin: auto;
+  border: 7px solid $colorMain;
+  @include borderRadius(7px);
+  background-color: $colorBg;
+  @media screen and (max-width: $sm){
+    width: 100%;
+    @include flexColumn;
+  }
+}
