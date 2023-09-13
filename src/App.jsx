@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { UserContext, ThemeContext, LanguageContext } from './contexts';
+import { UserContext, ThemeContext, LanguageContext } from "./contexts";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -59,7 +59,9 @@ class App extends Component {
     });
     return (
       <ThemeContext.Provider value={[theme, this.changeTheme]}>
-        <LanguageContext.Provider value={[this.state.language, this.changeLanguage]}>
+        <LanguageContext.Provider
+          value={[this.state.language, this.changeLanguage]}
+        >
           <UserContext.Provider
             value={{ user, selectorUser: this.selectorUser }}
           >
