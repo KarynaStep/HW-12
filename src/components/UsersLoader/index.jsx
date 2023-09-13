@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { getUsers } from "../../api";
 import Error from "../Error";
 import Spinner from "../Spinner";
-import { LanguageContext } from "../../contexts";
+import { withLanguage } from "./../../components/HOCs";
 import { LANGUAGE, LANGUAGE_NAV_MENU } from "./../../constants";
-// import styles from './UsersLoader.module.scss';
 
-class UsersLoader extends Component {
+const UsersLoaderFN = ({language}) => {
+  return (class UsersLoader extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +61,7 @@ class UsersLoader extends Component {
     if (error) {
       return <Error />;
     }
-    const renderFun = ([language]) => (
+    return (
       <section>
         <h2>
           {language === LANGUAGE.ENG
@@ -83,9 +83,9 @@ class UsersLoader extends Component {
         </ul>
       </section>
     );
-
-    return <LanguageContext.Consumer>{renderFun}</LanguageContext.Consumer>;
   }
+})
 }
 
-export default UsersLoader;
+
+export default withLanguage(UsersLoaderFN);

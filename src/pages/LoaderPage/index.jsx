@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { LanguageContext } from "../../contexts";
+import { withLanguage } from "./../../components/HOCs";
 import {
   LANGUAGE,
   LANGUAGE_NAV_MENU,
@@ -12,8 +12,7 @@ import {
 // import ViewEvents from '../../components/ViewEvents';
 // import ViewProducts from '../../components/ViewProducts';
 
-const LoaderPage = () => {
-  const render = ([language]) => (
+const LoaderPage = ({language}) => (
     <>
       <h3>
         {language === LANGUAGE.ENG
@@ -46,7 +45,5 @@ const LoaderPage = () => {
       <Outlet />
     </>
   );
-  return <LanguageContext.Consumer>{ render}</LanguageContext.Consumer>
-};
 
-export default LoaderPage;
+export default withLanguage(LoaderPage);
