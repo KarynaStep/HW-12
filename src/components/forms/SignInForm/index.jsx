@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import cx from 'classnames';
-import styles from './SignInForm.module.css';
+import React, { Component } from "react";
+import cx from "classnames";
+import styles from "./SignInForm.module.css";
 const initialValues = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
   emailValid: true,
   passwordValid: true,
   check: false,
@@ -26,7 +26,7 @@ class SignInForm extends Component {
   handleInput = ({ target: { name, value } }) => {
     this.setState({
       [name]: value,
-      [`${name}Valid`]: value.includes(' ') === false,
+      [`${name}Valid`]: value.includes(" ") === false,
     });
   };
 

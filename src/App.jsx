@@ -5,6 +5,8 @@ import { UserContext, ThemeContext, LanguageContext } from "./contexts";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import SignInForm from "./components/forms/SignInForm";
+
 import Home from './pages/Home';
 import UsersPage from './pages/UsersPage';
 import Page404 from './pages/Page404';
@@ -14,8 +16,10 @@ import EventsBlock from './pages/LoaderPage/EventsBlock';
 import ProductsBlock from './pages/LoaderPage/ProductsBlock';
 import cx from "classnames";
 import styles from "./App.module.scss";
+import FormsPage from './pages/FormsPage';
 
 import { THEMES, LANGUAGE } from './constants';
+
 
 class App extends Component {
   constructor(props) {
@@ -59,9 +63,7 @@ class App extends Component {
     });
     return (
       <ThemeContext.Provider value={[theme, this.changeTheme]}>
-        <LanguageContext.Provider
-          value={[language, this.changeLanguage]}
-        >
+        <LanguageContext.Provider value={[language, this.changeLanguage]}>
           <UserContext.Provider
             value={{ user, selectorUser: this.selectorUser }}
           >
@@ -70,6 +72,8 @@ class App extends Component {
               <main className={classes}>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/sign-up" element={<FormsPage />} />
+                  <Route path="/sign-in" element={<SignInForm />} />
                   <Route path="/users" element={<UsersPage />} />
                   <Route path="/loader/" element={<LoaderPage />}>
                     <Route path="users" element={<UsersBlock />} />

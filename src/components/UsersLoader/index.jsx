@@ -5,8 +5,7 @@ import Spinner from "../Spinner";
 import { withLanguage } from "./../../components/HOCs";
 import { LANGUAGE, LANGUAGE_NAV_MENU } from "./../../constants";
 
-const UsersLoaderFN = ({language}) => {
-  return (class UsersLoader extends Component {
+class UsersLoader extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,6 +57,7 @@ const UsersLoaderFN = ({language}) => {
 
   render() {
     const { isFetching, error, users, currentPage } = this.state;
+    const { language} = this.props;
     if (error) {
       return <Error />;
     }
@@ -84,8 +84,7 @@ const UsersLoaderFN = ({language}) => {
       </section>
     );
   }
-})
 }
 
 
-export default withLanguage(UsersLoaderFN);
+export default withLanguage(UsersLoader);
