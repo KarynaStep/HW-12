@@ -13,12 +13,12 @@ const NavMenu = ({ language }) => (
             : LANGUAGE_NAV_MENU.HOME_UKR}
         </NavLink>
       </li>
-      {/* <li>
+      <li>
         <NavLink to="/sign-up">sign-up</NavLink>
       </li>
       <li>
         <NavLink to="/sign-in">sign-in</NavLink>
-      </li> */}
+      </li>
       <li>
         <NavLink to="/users">
           {language === LANGUAGE.ENG
