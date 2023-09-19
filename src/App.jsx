@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { UserContext, ThemeContext, LanguageContext } from "./contexts";
@@ -14,82 +14,64 @@ import LoaderPage from './pages/LoaderPage';
 import UsersBlock from './pages/LoaderPage/UsersBlock';
 import EventsBlock from './pages/LoaderPage/EventsBlock';
 import ProductsBlock from './pages/LoaderPage/ProductsBlock';
-import cx from "classnames";
-import styles from "./App.module.scss";
 import FormsPage from './pages/FormsPage';
 
 import { THEMES, LANGUAGE } from './constants';
+import LearnHooks from './components/LearnHooks';
+import StopWatchHooks from './components/StopWatchHooks';
 
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        id: 1,
-        firstName: "Brad",
-        lastName: "Pitt",
-        isSelect: false,
-        avatar: "https://cdn-icons-png.flaticon.com/128/3641/3641963.png",
-      },
-      theme: THEMES.LIGHT,
-      language: LANGUAGE.ENG,
-    };
-  }
+const App = () => {
+  const [user, setUser] = useState({
+    id: 1,
+    firstName: "Brad",
+    lastName: "Pitt",
+    isSelect: false,
+    avatar: "https://cdn-icons-png.flaticon.com/128/3641/3641963.png",
+  });
+  const [theme, setTheme] = useState(THEMES.LIGHT);
+  const [language, setLanguage] = useState(LANGUAGE.ENG);
 
-  changeTheme = () => {
-    this.setState({
-      theme: this.state.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT,
-    });
+  const changeTheme = () => {
+    setTheme(theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT);
   };
-  changeLanguage = () => {
-    this.setState({
-      language:
-        this.state.language === LANGUAGE.ENG ? LANGUAGE.UKR : LANGUAGE.ENG,
-    });
+  const changeLanguage = () => {
+    setLanguage(language === LANGUAGE.ENG ? LANGUAGE.UKR : LANGUAGE.ENG);
   };
 
-  selectorUser = (id) => {
-    this.setState({
-      user: { ...this.state.user, isSelect: !this.state.user.isSelect },
-    });
+  const selectorUser = (id) => {
+    setUser({ ...user, isSelect: !user.isSelect });
   };
 
-  render() {
-    const { user, theme, language } = this.state;
-    const classes = cx({
-      [styles.light]: this.state.theme === THEMES.LIGHT,
-      [styles.dark]: this.state.theme === THEMES.DARK,
-    });
-    return (
-      <ThemeContext.Provider value={[theme, this.changeTheme]}>
-        <LanguageContext.Provider value={[language, this.changeLanguage]}>
-          <UserContext.Provider
-            value={{ user, selectorUser: this.selectorUser }}
-          >
-            <BrowserRouter>
-              <Header />
-              <main className={classes}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/sign-up" element={<FormsPage />} />
-                  <Route path="/sign-in" element={<SignInForm />} />
-                  <Route path="/users" element={<UsersPage />} />
-                  <Route path="/loader/" element={<LoaderPage />}>
-                    <Route path="users" element={<UsersBlock />} />
-                    <Route path="events" element={<EventsBlock />} />
-                    <Route path="products" element={<ProductsBlock />} />
-                  </Route>
-                  <Route path="*" element={<Page404 />} />
-                </Routes>
-              </main>
-              <Footer />
-            </BrowserRouter>
-          </UserContext.Provider>
-        </LanguageContext.Provider>
-      </ThemeContext.Provider>
-    );
-  }
-}
+  return (
+    <ThemeContext.Provider value={[theme, changeTheme]}>
+      <LanguageContext.Provider value={[language, changeLanguage]}>
+        <UserContext.Provider value={{ user, selectorUser: selectorUser }}>
+          <BrowserRouter>
+            <Header />
+            <LearnHooks />
+            <StopWatchHooks />
+            <main >
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/sign-up" element={<FormsPage />} />
+                <Route path="/sign-in" element={<SignInForm />} />
+                <Route path="/users" element={<UsersPage />} />
+                <Route path="/loader" element={<LoaderPage />}>
+                  <Route path="users" element={<UsersBlock />} />
+                  <Route path="events" element={<EventsBlock />} />
+                  <Route path="products" element={<ProductsBlock />} />
+                </Route>
+                <Route path="*" element={<Page404 />} />
+              </Routes>
+            </main>
+            <Footer />
+          </BrowserRouter>
+        </UserContext.Provider>
+      </LanguageContext.Provider>
+    </ThemeContext.Provider>
+  );
+};
+
 
 export default App;

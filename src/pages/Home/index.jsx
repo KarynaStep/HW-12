@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import CardUser from "../../components/CardSection/CardUser";
 import { LANGUAGE, LANGUAGE_NAV_MENU } from "./../../constants";
-import { withLanguage } from "./../../components/HOCs";
+import { LanguageContext } from "../../contexts";
 
 
-const Home = ({language}) => 
-      <div>
+
+const Home = () => {
+  const { language } = useContext(LanguageContext)
+  return (
+    <div>
         <h1>
           {language === LANGUAGE.ENG
             ? LANGUAGE_NAV_MENU.HOME
@@ -13,5 +16,8 @@ const Home = ({language}) =>
         </h1>
         <CardUser />
       </div>
+  )
+}
+  
 
-export default withLanguage(Home);
+export default Home;

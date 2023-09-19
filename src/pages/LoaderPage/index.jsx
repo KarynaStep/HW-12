@@ -1,18 +1,17 @@
-import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { withLanguage } from "./../../components/HOCs";
+import React, { useContext } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import {
   LANGUAGE,
   LANGUAGE_NAV_MENU,
   LANGUAGE_NAV_MENU_LOADER,
 } from "./../../constants";
-// import { getUsersJSON, getEventsJSON, getProductsJSON } from '../../api';
-// import LoaderData from '../../components/LoaderData';
-// import ViewUsers from '../../components/ViewUsers';
-// import ViewEvents from '../../components/ViewEvents';
-// import ViewProducts from '../../components/ViewProducts';
+import { LanguageContext } from "../../contexts";
 
-const LoaderPage = ({language}) => (
+
+const LoaderPage = (props) => {
+  const [language] = useContext(LanguageContext);
+
+  return (
     <>
       <h3>
         {language === LANGUAGE.ENG
@@ -45,5 +44,6 @@ const LoaderPage = ({language}) => (
       <Outlet />
     </>
   );
+};
 
-export default withLanguage(LoaderPage);
+export default LoaderPage;

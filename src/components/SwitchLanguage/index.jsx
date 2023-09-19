@@ -1,10 +1,9 @@
-import React from 'react';
-import { withLanguage } from "../HOCs";
+import React, { useContext } from "react";
+import { LanguageContext } from "../../contexts";
 
-const SwitchLanguage = ({language, changeLanguage}) => {
-  return( <button onClick={changeLanguage}> {language}</button>
-  );
-  
+const SwitchLanguage = (props) => {
+  const [ language, changeLanguage ] = useContext(LanguageContext);
+  return <button onClick={changeLanguage}> {language}</button>;
 };
 
-export default withLanguage(SwitchLanguage);
+export default SwitchLanguage;
