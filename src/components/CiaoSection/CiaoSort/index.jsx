@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class CiaoSort extends Component {
-  sortUsersByFirstName = () => {
+const CiaoSort = () => {
+const sortUsersByFirstName = () => {
     const { users, isSortFirstNameUp } = this.props;
     const newUsers = JSON.parse(JSON.stringify(users));
     newUsers.sort((a, b) => {
@@ -16,7 +16,7 @@ class CiaoSort extends Component {
     //виклик батьківської функції
     this.setState({ users: newUsers, isSortFirstNameUp: !isSortFirstNameUp });
   };
-  sortUsersById = () => {
+ const  sortUsersById = () => {
     const { users, isSortIdUp } = this.props;
     const newUsers = JSON.parse(JSON.stringify(users));
     newUsers.sort((a, b) => {
@@ -27,19 +27,18 @@ class CiaoSort extends Component {
     });
     this.setState({ users: newUsers, isSortIdUp: !isSortIdUp });
   };
-  render() {
-    const { isSortFirstNameUp, isSortIdUp } = this.props;
+
     return (
       <div>
-        <button onClick={this.sortUsersByFirstName}>
+        <button onClick={sortUsersByFirstName}>
           sort by name {isSortFirstNameUp ? 'up' : 'down'}
         </button>
-        <button onClick={this.sortUsersById}>
+        <button onClick={sortUsersById}>
           sort by id {isSortIdUp ? 'up' : 'down'}
         </button>
       </div>
     );
-  }
 }
+
 
 export default CiaoSort;

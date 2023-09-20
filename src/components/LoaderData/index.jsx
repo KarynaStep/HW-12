@@ -1,21 +1,19 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Component, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-class LoaderData extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      isFetching: false,
-      error: null,
-    };
-  }
 
-  componentDidMount() {
-    this.load();
-  }
+const LoaderData = () => {
+  const [data, setData] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
+  const [error, setError] = useState(null);
 
-  load = () => {
+  const { render } = this.props;
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  const load = () => {
     const { loadData } = this.props;
     this.setState({ isFetching: true });
     loadData()
@@ -29,11 +27,8 @@ class LoaderData extends Component {
         this.setState({ isFetching: false });
       });
   };
-
-  render() {
-    const { render } = this.props;
-    return render(this.state);
-  }
+   
+  return render(data, isFetching, error);
 }
 
 LoaderData.propTypes = {

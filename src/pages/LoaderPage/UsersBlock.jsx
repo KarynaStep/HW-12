@@ -1,16 +1,11 @@
 import React from 'react';
-import LoaderData from '../../components/LoaderData';
-import ViewUsers from '../../components/ViewUsers';
-import { getUsersJSON } from '../../api';
+import ViewEvents from '../../components/ViewEvents';
 
 const UsersBlock = () => {
   return (
     <>
       <h2>Users:</h2>
-      <LoaderData
-        loadData={getUsersJSON}
-        render={(state) => <ViewUsers state={state} />}
-      />
+      <ViewEvents />
     </>
   );
 };

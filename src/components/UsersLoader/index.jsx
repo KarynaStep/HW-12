@@ -6,65 +6,44 @@ import { LANGUAGE, LANGUAGE_NAV_MENU } from "./../../constants";
 import { LanguageContext } from "../../contexts";
 
 const UsersLoader = () => {
-  const [state, setState] = useState({
-    users: [],
-    error: null,
-    isFetching: false,
-    currentPage: 1,
-    currentResults: 5,
-  });
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentResults, setCurrentResults] = useState(5);
   const [language, setLanguage] = useContext(LanguageContext);
 
   const load = () => {
     // const { users, currentPage, currentResults } = state;
-    setState({ ...state, isFetching: true });
+    setIsFetching(true);
     getUsers({
-      page: state.currentPage,
-      results: state.currentResults,
+      page: currentPage,
+      results: currentResults,
     }).then((data) => {
-      console.log(data.results);
-      if (data.error) {
-        throw new Error();
-      }
-      setState({ ...state, users: data.results });
-      console.log(state);
+      setUsers(data.results);
     })
-    // .catch((err) => {
-    //   setState({ ...state, error: err })
-    // })
-    // .finally(() => {
-    //   setState({ ...state, isFetching: false })
-    // });
+    .catch((err) => {
+      setError(err);
+    })
+    .finally(() => {
+      setIsFetching(false);
+    });
   };
 
   useEffect(() => {
-    console.log(state);
     load();
-  }, [state.currentPage]);
-
-  // componentDidMount() {
-  //   load();
-  // }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (currentPage !== prevState.currentPage) {
-  //     load();
-  //   }
-  // }
+  }, [currentPage]);
 
   const prevPage = () => {
-    if (state.currentPage > 1) {
-      setState((state, props) => {
-        return { ...state, currentPage: state.currentPage - 1 };
-      });
+    if (currentPage > 1) {
+      setCurrentPage((currentPage) => currentPage - 1);
     }
   };
 
   const nextPage = () =>
-    setState((state, props) => {
-      return { ...state, currentPage: state.currentPage + 1 };
-    });
+    setCurrentPage((currentPage) => currentPage + 1);
 
-  if (state.error) {
+  if (error) {
     return <Error />;
   }
   return (
@@ -76,16 +55,16 @@ const UsersLoader = () => {
         :
       </h2>
       <div>
-        <button onClick={prevPage} disabled={state.currentPage === 1}>
+        <button onClick={prevPage} disabled={currentPage === 1}>
           &lt; prev
         </button>
-        <span>&nbsp;{state.currentPage}&nbsp;</span>
+        <span>&nbsp;{currentPage}&nbsp;</span>
         <button onClick={nextPage}>next &gt;</button>
       </div>
       <ul>
-        {state.isFetching && <Spinner />}
-        {state.isFetching ||
-          state.users.map((user) => (
+        {isFetching && <Spinner />}
+        {isFetching ||
+          users.map((user) => (
             <li key={user.login.uuid}>{user.email}</li>
           ))}
       </ul>

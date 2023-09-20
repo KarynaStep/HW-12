@@ -49,8 +49,6 @@ const App = () => {
         <UserContext.Provider value={{ user, selectorUser: selectorUser }}>
           <BrowserRouter>
             <Header />
-            <LearnHooks />
-            <StopWatchHooks />
             <main >
               <Routes>
                 <Route path="/" element={<Home />} />
