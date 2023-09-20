@@ -28,7 +28,7 @@ const UsersLoader = () => {
       }
       setState({ ...state, users: data.results });
       console.log(state);
-    });
+    })
     // .catch((err) => {
     //   setState({ ...state, error: err })
     // })
