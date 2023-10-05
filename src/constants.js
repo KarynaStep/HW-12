@@ -55,3 +55,7 @@ export const LANGUAGE_NAV_MENU_LOADER = {
   PRODUCTS: "Products",
   PRODUCTS_UKR: "Продукція",
 };
+export const STATUS_MENU = {
+  OPEN: 'OPEN',
+  CLOSE: 'CLOSE'
+}

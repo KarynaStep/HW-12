@@ -1,11 +1,11 @@
-import { Component, useState, useEffect } from "react";
+import {useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 
 const LoaderData = () => {
-  const [data, setData] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState(null);
+  const [data, ] = useState([]);
+  const [isFetching, ] = useState(false);
+  const [error, ] = useState(null);
 
   const { render } = this.props;
 
